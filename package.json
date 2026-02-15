@@ -1,19 +1,22 @@
 {
-  "name": "SpecialAgentName",
+  "name": "spy-id:-agency-enrollment",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "vite build",
     "dev": "vite",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "@google/generative-ai": "^0.1.3"
+    "react": "^19.2.4",
+    "@google/genai": "^1.41.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "vite": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.0"
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
   }
 }

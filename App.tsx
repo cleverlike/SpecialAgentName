@@ -50,7 +50,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="w-full max-w-5xl crt-flicker">
-        <TerminalFrame title={profile ? `OPERATIVE PROFILE: ${profile.agentName}` : "AGENCY ENROLLMENT TERMINAL"}>
+        <TerminalFrame title={profile ? `OPERATIVE PROFILE: ${profile.fullName}` : "AGENCY ENROLLMENT TERMINAL"}>
           {error && (
             <div className="bg-red-500/20 border border-red-500/50 p-4 mb-4 text-red-500 text-xs animate-pulse font-bold">
               SYSTEM ERROR: {error}
