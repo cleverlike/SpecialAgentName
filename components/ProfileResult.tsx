@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { AgentProfile } from '../types';
+import { AgentProfile } from '../types.ts';
 
 interface ProfileResultProps {
   profile: AgentProfile;
@@ -11,20 +11,16 @@ export const ProfileResult: React.FC<ProfileResultProps> = ({ profile, onReset }
   return (
     <div className="animate-in fade-in zoom-in duration-1000">
       <div className="flex flex-col md:flex-row gap-8 items-start">
-        {/* Profile Card Sidebar */}
         <div className="w-full md:w-64 space-y-6">
           <div className="relative aspect-square border-2 border-emerald-500/40 rounded bg-emerald-900/10 overflow-hidden group">
-             {/* Placeholder Avatar */}
             <div className="absolute inset-0 flex items-center justify-center text-emerald-500/20">
               <svg className="w-32 h-32" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
               </svg>
             </div>
-            {/* ID Badge Overlay */}
             <div className="absolute top-2 left-2 bg-emerald-500 text-black text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-tighter">
               ACTIVE AGENT
             </div>
-            {/* Scanning Overlay Effect */}
             <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent pointer-events-none" />
           </div>
 
@@ -41,7 +37,6 @@ export const ProfileResult: React.FC<ProfileResultProps> = ({ profile, onReset }
           </div>
         </div>
 
-        {/* Main Briefing Area */}
         <div className="flex-1 space-y-8">
           <div>
             <span className="text-emerald-500/60 text-xs uppercase font-mono tracking-widest">Agent Name:</span>

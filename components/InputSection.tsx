@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { UserResponses } from '../types';
+import { UserResponses } from '../types.ts';
 
 interface InputSectionProps {
   onSubmit: (data: UserResponses) => void;
@@ -18,7 +18,6 @@ export const InputSection: React.FC<InputSectionProps> = ({ onSubmit }) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Fix: Explicitly cast Object.values to string[] to resolve 'unknown' type error for val.trim()
   const isFormValid = (Object.values(formData) as string[]).every(val => val.trim() !== '');
 
   const handleSubmit = (e: React.FormEvent) => {

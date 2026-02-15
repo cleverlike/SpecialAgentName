@@ -1,12 +1,12 @@
 
 import React, { useState, useCallback } from 'react';
-import { AppStep, UserResponses, AgentProfile } from './types';
-import { TerminalFrame } from './components/TerminalFrame';
-import { InputSection } from './components/InputSection';
-import { ScannerSection } from './components/ScannerSection';
-import { ProcessingOverlay } from './components/ProcessingOverlay';
-import { ProfileResult } from './components/ProfileResult';
-import { generateAgentIdentity } from './services/geminiService';
+import { AppStep, UserResponses, AgentProfile } from './types.ts';
+import { TerminalFrame } from './components/TerminalFrame.tsx';
+import { InputSection } from './components/InputSection.tsx';
+import { ScannerSection } from './components/ScannerSection.tsx';
+import { ProcessingOverlay } from './components/ProcessingOverlay.tsx';
+import { ProfileResult } from './components/ProfileResult.tsx';
+import { generateAgentIdentity } from './services/geminiService.ts';
 
 const App: React.FC = () => {
   const [step, setStep] = useState<AppStep>(AppStep.INPUT);
@@ -28,7 +28,7 @@ const App: React.FC = () => {
       setProfile(generatedProfile);
       setStep(AppStep.RESULT);
     } catch (err) {
-      console.error(err);
+      console.error("Agency Connection Error:", err);
       setError("FAILED TO ESTABLISH AGENCY CONNECTION. RETRYING...");
       setTimeout(() => setStep(AppStep.INPUT), 3000);
     }
@@ -43,7 +43,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 grid-bg p-4 md:p-8 flex items-center justify-center font-mono">
-      {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08)_0%,transparent_70%)]" />
         <div className="scanline" />
@@ -74,7 +73,6 @@ const App: React.FC = () => {
           )}
         </TerminalFrame>
 
-        {/* Bottom Technical Status */}
         <div className="mt-4 flex justify-between items-center text-[10px] text-emerald-500/40 uppercase tracking-widest px-2">
           <div className="flex items-center space-x-4">
             <span>Uplink: STABLE</span>

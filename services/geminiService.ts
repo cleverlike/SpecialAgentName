@@ -1,9 +1,9 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
-import { UserResponses, AgentProfile } from "../types";
+import { UserResponses, AgentProfile } from "../types.ts";
 
 export const generateAgentIdentity = async (data: UserResponses): Promise<AgentProfile> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
   
   const prompt = `
     Create a high-tech, cool secret agent identity for a child based on their personal "Neural Fingerprint" (provided below).
@@ -45,7 +45,19 @@ export const generateAgentIdentity = async (data: UserResponses): Promise<AgentP
     }
   });
 
-  const text = response.text;
+  let text = response.text || "";
+  
+  // Clean potential Markdown wrapping if it exists
+  if (text.includes("```")) {
+    text = text.replace(/```json|```/g, "").trim();
+  }
+
   if (!text) throw new Error("No response from Agency HQ");
-  return JSON.parse(text) as AgentProfile;
+  
+  try {
+    return JSON.parse(text) as AgentProfile;
+  } catch (parseError) {
+    console.error("JSON Parse Error:", parseError, "Raw text:", text);
+    throw new Error("Agency data packet corrupted.");
+  }
 };
