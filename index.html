@@ -53,8 +53,12 @@
       }
     </style>
     <script>
-      // Shim to prevent crashes on static hosts where process.env isn't injected
-      window.process = { env: { API_KEY: "" } };
+      // Non-destructive shim for process.env
+      window.process = window.process || {};
+      window.process.env = window.process.env || {};
+      if (typeof window.process.env.API_KEY === 'undefined') {
+        window.process.env.API_KEY = "";
+      }
     </script>
     <script type="importmap">
 {

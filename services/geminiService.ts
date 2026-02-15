@@ -3,7 +3,9 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { UserResponses, AgentProfile } from "../types.ts";
 
 export const generateAgentIdentity = async (data: UserResponses): Promise<AgentProfile> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
+  // Initialize the GoogleGenAI client using the API_KEY from the environment.
+  // A new instance is created on each call to ensure the latest selected key is utilized.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const prompt = `
     Create a high-tech, cool secret agent identity for a child based on their personal "Neural Fingerprint" (provided below).
@@ -25,6 +27,7 @@ export const generateAgentIdentity = async (data: UserResponses): Promise<AgentP
     8. CLEARANCE LEVEL: A number from 1 to 5.
   `;
 
+  // Use the models.generateContent method as per the latest SDK requirements.
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
     contents: prompt,
@@ -45,9 +48,10 @@ export const generateAgentIdentity = async (data: UserResponses): Promise<AgentP
     }
   });
 
+  // Access the text content directly via the .text property (not a method).
   let text = response.text || "";
   
-  // Clean potential Markdown wrapping if it exists
+  // Clean potential Markdown wrapping if it exists, though responseMimeType: application/json should return raw JSON.
   if (text.includes("```")) {
     text = text.replace(/```json|```/g, "").trim();
   }

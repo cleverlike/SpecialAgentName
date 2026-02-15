@@ -16,6 +16,7 @@ export interface AgentProfile {
 }
 
 export enum AppStep {
+  KEY_REQUIRED = 'KEY_REQUIRED',
   INPUT = 'INPUT',
   SCAN = 'SCAN',
   PROCESSING = 'PROCESSING',
